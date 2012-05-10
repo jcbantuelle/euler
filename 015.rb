@@ -1,13 +1,3 @@
-#$dimension = 5
-
-#def traverse(right, down)
-#  return 0 if right == $dimension and down == $dimension
-#  return 1 if right == $dimension or down == $dimension
-#  return traverse(right+1, down) + traverse(right, down+1)
-#end
-
-#puts traverse(0,0)
-
 paths = Array.new
 paths[2] = {:routes => 6, :edges => {1 => 1, 2 => 2, 3 => 6}}
 paths[3] = {:routes => 20, :edges => {1 => 1, 2 => 3, 3 => 6, 4 => 20}}
@@ -27,6 +17,5 @@ paths[3] = {:routes => 20, :edges => {1 => 1, 2 => 3, 3 => 6, 4 => 20}}
 end
 
 2.upto(20) do |i|
-  #puts "Edges #{i}: #{paths[i][:edges].to_s}"
   puts "Routes #{i}: #{paths[i][:routes]}"
 end
