@@ -1,11 +1,9 @@
+triangle = 0
 counter = 1
 while true
   
   # Find next Triangle number
-  triangle = 0
-  (1..counter).each { |j|
-    triangle += j
-  }
+  triangle = triangle + counter
 
   # Factor Triangle number
   factors = 2
