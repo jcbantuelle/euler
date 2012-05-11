@@ -16,6 +16,4 @@ paths[3] = {:routes => 20, :edges => {1 => 1, 2 => 3, 3 => 6, 4 => 20}}
   paths[dimension][:routes] = routes*2
 end
 
-2.upto(20) do |i|
-  puts "Routes #{i}: #{paths[i][:routes]}"
-end
+puts paths[20][:routes]
