@@ -7,8 +7,11 @@ while true
 
   # Factor Triangle number
   factors = 2
-  (2..(Math.sqrt(triangle))).each { |i|
-    factors += 2 if triangle % i == 0
+  square_root = Math.sqrt(triangle)
+  (2..square_root).each { |factor|
+    if triangle % factor == 0
+      factors += factor == square_root ? 1 : 2
+    end
   }
     
   break if factors > 500
