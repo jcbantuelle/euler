@@ -1,0 +1,1 @@
+puts (1.upto(1000)).map{|i| i**i}.inject(:+).to_s.slice(-10,10)
