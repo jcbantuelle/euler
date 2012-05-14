@@ -1,15 +1,24 @@
-def is_prime(a)
-  return false if a % 2 == 0
-  (3..(a / 2)).step(2) { |i| 
-    return false if a % i == 0
-  }
-  return true
+def is_prime(number)
+  2.upto(Math.sqrt(number)) do |factor|
+    return false if number % factor == 0
+  end
+  true
 end
 
-factor = 600851475143
-(775146).downto(1) { |i|
-  if factor % i == 0 and is_prime(i)
-    puts i
-    break
+composite = 600851475143
+biggest_prime = 0
+
+3.upto(Math.sqrt(composite)) do |small_factor|
+  if composite % small_factor == 0
+    big_factor = composite / small_factor
+    
+    if is_prime(big_factor)
+      biggest_prime = big_factor
+      break
+    end
+    
+    biggest_prime = small_factor if is_prime(small_factor)
   end
-}
+end
+
+puts biggest_prime
