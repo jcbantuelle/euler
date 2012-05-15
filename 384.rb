@@ -18,7 +18,7 @@ substitution = {
 
 string = "1 1 1 -1"
 
-1.upto(15) do
+1.upto(23) do
   parsed = string.scan(/-?\d\s-?\d/)
   string = string + " " + parsed.slice(parsed.size/2..parsed.size).map{|i| substitution[i]}.join(" ")
 end
@@ -28,20 +28,16 @@ t = 2
 c = 1
 
 sum = 0
-sn = ""
 
 string.split(/\s/).each_with_index do |number, index|
   sum += number.to_i
-  sn += "#{sum} "
   if seen.include?(sum)
     seen[sum] += 1
     if sum == t and seen[sum] == c
-      #puts "g(#{t}, #{c}) = #{index}"
+      puts "g(#{t}, #{c}) = #{index}"
       fibonacci_index += 1
       c = t
       t = fibonacci[fibonacci_index]
     end
   end
 end
-
-puts sn
