@@ -6,33 +6,21 @@ def expand_dividend(divisor, dividend)
   dividend
 end
 
-def long_division(divisor, dividend)
-  count = 1
-  previous_dividends = {}
-  while true
-    previous_dividends[dividend] = true
-    dividend = dividend % divisor
-    dividend = expand_dividend(divisor, dividend)
-    break if previous_dividends.include?(dividend)
-    count += 1
-  end
-  count
-end
-
 longest = {:length => 0, :value => 2}
 
 3.upto(999) do |divisor|
   count = 0
   previous_dividends = {}
   dividend = expand_dividend(divisor, 1)
+  sequence = []
   
   while true
     break if dividend % divisor == 0
     previous_dividends[dividend] = true
-    dividend = dividend % divisor
-    dividend = expand_dividend(divisor, dividend)
+    sequence << dividend
+    dividend = expand_dividend(divisor, dividend % divisor)
     if previous_dividends.include?(dividend)
-      count = long_division(divisor, dividend)
+      count = sequence.size - sequence.index(dividend)
       break
     end
   end
