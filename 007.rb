@@ -1,18 +1,17 @@
-def is_prime(a, primes)
-  primes.each do |prime|
-    return false if a % prime == 0 
-  end
-  return true
-end
+max_value = 1000000
 
-primes = [2]
-counter = 1
+sieve = []
+(2..max_value).each { |i| 
+  sieve << i
+}
 
-while primes.count < 10001
-  counter += 2
-  if is_prime(counter, primes)
-    primes << counter
-  end
-end
+sieve.each { |index|
+  next if index.nil?
+  value = index
+  (value..max_value).step(value) { |filter|
+    sieve[filter-2] = nil if filter != value
+  }
+}
 
-puts counter
+sieve.compact!
+puts sieve[10000]
