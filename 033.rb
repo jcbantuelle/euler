@@ -14,4 +14,4 @@ fractions = 1.0
   end
 end
 
-puts fractions
+puts 1 / fractions
