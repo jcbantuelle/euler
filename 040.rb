@@ -1,7 +1,8 @@
 count = 1
 irrational = ""
+
 while true
-  irrational += count.to_s
+  irrational << count.to_s
   break if irrational.length > 1000000
   count += 1
 end
