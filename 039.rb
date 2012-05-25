@@ -14,5 +14,4 @@ max_perimeter = 0
   end
 end
 
-puts max_solutions
 puts max_perimeter
