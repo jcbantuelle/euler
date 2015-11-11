@@ -1,25 +1,44 @@
 class Sudoku
-  
+
   attr_accessor :grid
-  
+
   def initialize(grid)
     @grid = grid
     @invalid = false
     @stuck = false
   end
-  
+
   def solve
-    until solved? || @stuck
+    until solved? || stuck?
       @stuck = true
       @grid.each_with_index do |value, index|
         solve_square(index) if value == 0
         return if invalid?
       end
     end
-    
-    guess if @stuck
+
+    guess if stuck?
   end
-  
+
+  def to_s
+    output = ""
+
+    count = 1
+    @grid.each do |value|
+      output += value.to_s
+      output += "\n" if count % 9 == 0
+      count += 1
+    end
+
+    output
+  end
+
+  def solved?
+    !@grid.include?(0)
+  end
+
+  private
+
   def guess
     guess_index = @grid.index(0)
     options = valid_options(guess_index)
@@ -34,47 +53,26 @@ class Sudoku
       end
     end
   end
-  
-  def to_s
-    output = ""
 
-    count = 1
-    @grid.each do |value|
-      output += value.to_s
-      output += "\n" if count % 9 == 0
-      count += 1
-    end
-    
-    output
-  end
-  
-  def solved?
-    !@grid.include?(0)
-  end
-  
-  def invalid?
-    @invalid
-  end
-  
   def solve_square(index)
     options = valid_options(index)
-    
+
     @invalid = options.length == 0
     if options.length == 1
       @stuck = false
       @grid[index] = options[0]
     end
   end
-  
+
   def valid_options(index)
-    options = [1,2,3,4,5,6,7,8,9]
+    possible_options = [1,2,3,4,5,6,7,8,9]
     invalid_options = column_values(index)
     invalid_options += row_values(index)
     invalid_options += grid_values(index)
     invalid_options.uniq!
-    options.reject {|i| invalid_options.include?(i) }
+    possible_options.reject {|i| invalid_options.include?(i) }
   end
-  
+
   def column_values(index)
     values = []
     (index % 9).step(80, 9) do |column_index|
@@ -82,7 +80,7 @@ class Sudoku
     end
     values
   end
-  
+
   def row_values(index)
     values = []
     row_index = index - (index % 9)
@@ -92,7 +90,7 @@ class Sudoku
     }
     values
   end
-  
+
   def grid_values(index)
     values = []
     row_start = (index / 27) * 3 * 9
@@ -106,7 +104,15 @@ class Sudoku
     end
     values
   end
-  
+
+  def invalid?
+    @invalid
+  end
+
+  def stuck?
+    @stuck
+  end
+
 end
 
 puzzles = []
